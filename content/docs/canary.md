@@ -15,7 +15,7 @@ author: "xzeu"
 # P.S. comment can only be closed
 comment: false
 toc: true
-autoCollapseToc:true
+autoCollapseToc: true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
