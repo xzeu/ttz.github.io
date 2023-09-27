@@ -14,8 +14,8 @@ author: "xzeu"
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: false
-toc: false
-autoCollapseToc: false
+toc: true
+autoCollapseToc:true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
@@ -27,7 +27,6 @@ mathjax: true
 #     parent: "docs"
 #     weight: 1
 ---
-
 - [1. Ingress-Nginx Canary介绍](#1-ingress-nginx-canary介绍)
 - [2. ingress-nginx Canary实现](#2-ingress-nginx-canary实现)
   - [2.1. 基于客户端请求的流量切分场景](#21-基于客户端请求的流量切分场景)
@@ -37,6 +36,7 @@ mathjax: true
   - [4.2. 案例](#42-案例)
 
 <!--more-->
+
 # 1. Ingress-Nginx Canary介绍
 
 Nginx Ingress Controller 作为项目对外的流量入口和项目中各个服务的反向代理。
@@ -45,15 +45,15 @@ Nginx Ingress Controller 作为项目对外的流量入口和项目中各个服�
 
 Nginx Annotations 的几种 Canary 规则：
 
-| Annotation                                           | 说明                                                                                                                                                                                                                                                             |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| nginx.ingress.kubernetes.io/canary                   | 必须设置该Annotation值为`true`，否则其它规则将不会生效。取值：`true`：启用`canary`功能。`false`：不启用`canary`功能。                                                                                                                                            |
-| nginx.ingress.kubernetes.io/canary-by-header         | 表示基于请求头的名称进行灰度发布。请求头名称的特殊取值：  `always`：无论什么情况下，流量均会进入灰度服务。 `never`：无论什么情况下，流量均不会进入灰度服务。 若没有指定请求头名称的值，则只要该头存在，都会进行流量转发。                                        |
-| nginx.ingress.kubernetes.io/canary-by-header-value   | 表示基于请求头的值进行灰度发布。 需要与`canary-by-header`头配合使用。                                                                                                                                                                                            |
-| nginx.ingress.kubernetes.io/canary-by-header-pattern | 表示基于请求头的值进行灰度发布，并对请求头的值进行正则匹配。 需要与`canary-by-header`头配合使用。 取值为用于匹配请求头的值的正则表达式。                                                                                                                         |
-| nginx.ingress.kubernetes.io/canary-by-cookie         | 表示基于Cookie进行灰度发布。例如，`nginx.ingress.kubernetes.io/canary-by-cookie: foo`。 Cookie内容的取值：  `always`：当`foo=always`，流量会进入灰度服务。 `never`：当`foo=never`，流量不会进入灰度服务。 只有当Cookie存在，且值为`always`时，才会进行流量转发。 |
-| nginx.ingress.kubernetes.io/canary-weight            | 表示基于权重进行灰度发布。 取值范围：0~权重总值。 若未设定总值，默认总值为100。                                                                                                                                                                                  |
-| nginx.ingress.kubernetes.io/canary-weight-total      | 表示设定的权重总值。 若未设定总值，默认总值为100。                                                                                                                                                                                                               |
+| Annotation                                           | 说明                                                                                                                                                                                                                                                                |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nginx.ingress.kubernetes.io/canary                   | 必须设置该Annotation值为 `true`，否则其它规则将不会生效。取值：`true`：启用 `canary`功能。`false`：不启用 `canary`功能。                                                                                                                                            |
+| nginx.ingress.kubernetes.io/canary-by-header         | 表示基于请求头的名称进行灰度发布。请求头名称的特殊取值：`always`：无论什么情况下，流量均会进入灰度服务。 `never`：无论什么情况下，流量均不会进入灰度服务。 若没有指定请求头名称的值，则只要该头存在，都会进行流量转发。                                             |
+| nginx.ingress.kubernetes.io/canary-by-header-value   | 表示基于请求头的值进行灰度发布。 需要与 `canary-by-header`头配合使用。                                                                                                                                                                                              |
+| nginx.ingress.kubernetes.io/canary-by-header-pattern | 表示基于请求头的值进行灰度发布，并对请求头的值进行正则匹配。 需要与 `canary-by-header`头配合使用。 取值为用于匹配请求头的值的正则表达式。                                                                                                                           |
+| nginx.ingress.kubernetes.io/canary-by-cookie         | 表示基于Cookie进行灰度发布。例如，`nginx.ingress.kubernetes.io/canary-by-cookie: foo`。 Cookie内容的取值：  `always`：当 `foo=always`，流量会进入灰度服务。 `never`：当 `foo=never`，流量不会进入灰度服务。 只有当Cookie存在，且值为 `always`时，才会进行流量转发。 |
+| nginx.ingress.kubernetes.io/canary-weight            | 表示基于权重进行灰度发布。 取值范围：0~权重总值。 若未设定总值，默认总值为100。                                                                                                                                                                                     |
+| nginx.ingress.kubernetes.io/canary-weight-total      | 表示设定的权重总值。 若未设定总值，默认总值为100。                                                                                                                                                                                                                  |
 
 注意：不同灰度方式的优先级 由高到低 为：
 
@@ -76,9 +76,7 @@ Nginx Annotations 的几种 Canary 规则：
 通过上面的annotation来实现灰度发布，其 思路如下：
 
 1. 在集群中部署两套系统，一套是stable版本(old-nginx)，一套是canary版本(new-nginx)，两个版本都有自己的service；
-
 2. 定义两个ingress配置，一个正常提供服务，一个增加canary的annotation；
-
 3. 待canary版本无误后，将其切换成stable版本，并且将旧的版本下线，流量全部接入新的stable版本
 
 old-nginx 创建Deployment、Service、Ingress。
@@ -140,11 +138,13 @@ rules:
                 number: 80
           path: /
 ```
+
 测试验证：（预期输出：old）
 
 ```sh
 $ curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 ```
+
 灰度发布新版本服务：
 
 new-nginx 创建Deployment、Service。
@@ -221,6 +221,7 @@ rules:
                 number: 80
           path: /
 ```
+
 按照header头信息转发流量：
 
 ```sh
@@ -238,6 +239,7 @@ new
 ---
 
 需求：请求头中满足foo=bar的客户端请求，若不包含该请求头，再将50%的流量路由到新版本服务中。
+
 ```yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -267,7 +269,9 @@ rules:
                 number: 80
           path: /
 ```
+
 测试验证：(几乎可以达到50%请求分布)
+
 ```sh
 # curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 new
@@ -286,9 +290,11 @@ old
 # curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 old
 ```
+
 系统运行一段时间后，当新版本服务已经稳定并且符合预期后，需要下线老版本的服务 ，仅保留新版本服务在线上运行。
 
 为了达到该目标，需要将旧版本的Service指向新版本服务的Deployment，并且删除旧版本的Deployment和新版本的Service。
+
 ```yml
 apiVersion: v1
 kind: Service
@@ -305,7 +311,9 @@ selector:
 sessionAffinity: None
 type: ClusterIP
 ```
+
 预期输出：
+
 ```sh
 # curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 new
@@ -317,12 +325,10 @@ new
 
 日常工作中基于开源ingress-nginx实线的高级功能：
 
-通过修改`nginx.ingress.kubernetes.io/configuration-snippet`配置，并且配置正则实现：
+通过修改 `nginx.ingress.kubernetes.io/configuration-snippet`配置，并且配置正则实现：
 
 - 当header头中有关键字（foo 或 new）字段的时候，自动将流量转发至new-nginx；
-
 - nginx.ingress.kubernetes.io/configuration-snippet （用于插入 location 块代码段）;
-
 - nginx.ingress.kubernetes.io/server-snippet （用于插入 server 块中的代码段）;
 
 ```yml
@@ -368,7 +374,7 @@ new
 new
 # curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 old
-```     
+```
 
 # 4. 阿里开源ingress-nginx实现
 
@@ -396,7 +402,9 @@ nginx.ingress.kubernetes.io/service-match: |
 # - 完整匹配格式："{exact expression}"，""表明采用完整方式匹配。
 
 ```
+
 路由匹配规则配置示例：
+
 ```sh
 # 请求头中满足foo正则匹配^bar$的请求被转发到新版本服务new-nginx中。
 new-nginx: header("foo", /^bar$/)
@@ -407,6 +415,7 @@ new-nginx: cookie("foo", /^sticky-.+$/)
 # query param中满足foo完整匹配bar的请求被转发到新版本服务new-nginx中。
 new-nginx: query("foo", "bar")
 ```
+
 `nginx.ingress.kubernetes.io/service-weight：`该注解用来配置新旧版本服务的流量权重。
 
 ```sh
@@ -426,6 +435,7 @@ nginx.ingress.kubernetes.io/service-weight: |
 ## 4.2. 案例
 
 创建老服务的：Deployment、Service。
+
 ```yml
 apiVersion: apps/v1
 kind: Deployment
@@ -464,7 +474,9 @@ selector:
 sessionAffinity: None
 type: ClusterIP
 ```
+
 Ingress资源创建：
+
 ```yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -485,9 +497,11 @@ rules:
                 number: 80
           path: /
 ```
+
 灰度发布新版本服务
 
 发布一个新版本的Nginx服务并配置路由规则。
+
 ```yml
 apiVersion: apps/v1
 kind: Deployment
@@ -526,9 +540,11 @@ selector:
 sessionAffinity: None
 type: ClusterIP
 ```
+
 设置满足特定规则的客户端才能访问新版本服务。以下示例仅请求头中满足foo=bar的客户端请求才能路由到新版本服务。
 
 - 修改如上步骤创建的Ingress。
+
 ```yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -562,14 +578,18 @@ rules:
               number: 80
         pathType: ImplementationSpecific
 ```
+
 测试验证：
 
 执行以下命令，访问当前服务：
+
 ```sh
 $ curl -H "Host: nginx.kubernets.cn" http://nginx.kubernets.cn
 old
 ```
+
 执行以下命令，请求头中满足foo=bar的客户端请求访问服务：
+
 ```
 $ curl -H "Host: nginx.kubernets.cn" -H "foo: bar" http://nginx.kubernets.cn
 new

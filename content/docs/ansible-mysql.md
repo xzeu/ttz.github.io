@@ -14,8 +14,8 @@ author: "xzeu"
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: false
-toc: false
-autoCollapseToc: false
+toc: true
+autoCollapseToc: true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
@@ -40,9 +40,10 @@ mathjax: true
   - [9.2. 主节点建库，从节点查看同步正常](#92-主节点建库从节点查看同步正常)
 
 <!--more-->
+
 ## 1. 部署目标
 
-> 1、快速部署一套一主两从的mysql集群  
+> 1、快速部署一套一主两从的mysql集群
 > 2、部署过程中支持交互式定义安装目录及监听端口号
 
 ## 2. 部署清单目录结构
@@ -246,7 +247,7 @@ root@master:/opt/mysql# cat roles/mysql/tasks/main.yml
     login_unix_socket: "{{ mysql_sock }}"
     login_host: localhost
     login_port: "{{ mysql_port }}"
-    login_user: root     
+    login_user: root   
     login_password: "{{ mysql_root_passwd }}"
     master_host: "{{ master_ip }}" 
     master_user: "{{ repl_user }}" 
@@ -327,7 +328,7 @@ datadir={{ mysql_install_path }}/{{ mysql_link }}/data
 # 设置主节点server-id=1，模式为读写；从节点server-id=2,模式为只读
 {% if master is defined %}
 server-id=1
-#read-only=0                             
+#read-only=0                           
 {% else %}
 server-id=2
 #read-only=1

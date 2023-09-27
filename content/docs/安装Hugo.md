@@ -8,7 +8,7 @@ categories:
 tags:
   - hugo
 # comment: false
-# toc: true
+
 author: "xzeu"
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 mathjax: true
@@ -22,7 +22,9 @@ mathjax: true
   - [安装皮肤](#安装皮肤)
   - [运行Hugo](#运行hugo)
   - [部署](#部署)
+
 <!--more-->
+
 # 快速开始
 
 ## 安装Hugo
@@ -31,7 +33,7 @@ mathjax: true
 
 到 [Hugo Releases](https://github.com/spf13/hugo/releases) 下载对应的操作系统版本的Hugo二进制文件（hugo或者hugo.exe）
 
-Mac下直接使用`Homebrew`安装：
+Mac下直接使用 `Homebrew`安装：
 
 ```shell
 brew install hugo
@@ -44,16 +46,16 @@ brew install hugo
 - [Git](http://git-scm.com/)
 - [Mercurial](http://mercurial.selenic.com/)
 - [Go](http://golang.org/) 1.3+ (Go 1.4+ on Windows)
-设置好`GOPATH`环境变量，获取源码并编译：
+  设置好 `GOPATH`环境变量，获取源码并编译：
 
 ```shell
 $ export GOPATH=$HOME/go
 $ go get -v github.com/spf13/hugo
 ```
 
-源码会下载到 `$GOPATH/src` 目录，二进制在`$GOPATH/bin/`
+源码会下载到 `$GOPATH/src` 目录，二进制在 `$GOPATH/bin/`
 
-如果需要更新所有Hugo的依赖库，增加`-u`参数：
+如果需要更新所有Hugo的依赖库，增加 `-u`参数：
 
 ```shell
 $ go get -u -v github.com/spf13/hugo
@@ -67,7 +69,7 @@ $ go get -u -v github.com/spf13/hugo
 $ hugo new site /path/to/site
 ```
 
-这样就在`/path/to/site`目录里生成了初始站点，进去目录：
+这样就在 `/path/to/site`目录里生成了初始站点，进去目录：
 
 ```shell
 $ cd /path/to/site
@@ -91,7 +93,7 @@ $ cd /path/to/site
 hugo new about.md
 ```
 
-`about.md` 自动生成到了`content/about.md`，打开`about.md`看下：
+`about.md` 自动生成到了 `content/about.md`，打开 `about.md`看下：
 
 ```shell
 +++
@@ -104,15 +106,15 @@ title = "about"
 正文内容
 ```
 
-内容是`Markdown`格式的，`+++`之间的内容是 [TOML](https://github.com/toml-lang/toml) 格式的，根据你的喜好，你可以换成 [YAML](http://www.yaml.org/) 格式（使用 `---` 标记）或者 [JSON](http://www.yaml.org/) 格式。
+内容是 `Markdown`格式的，`+++`之间的内容是 [TOML](https://github.com/toml-lang/toml) 格式的，根据你的喜好，你可以换成 [YAML](http://www.yaml.org/) 格式（使用 `---` 标记）或者 [JSON](http://www.yaml.org/) 格式。
 
-创建第一篇文章，放到`post`目录，方便之后生成聚合页面。
+创建第一篇文章，放到 `post`目录，方便之后生成聚合页面。
 
 ```shell
 hugo new post/first.md
 ```
 
-打开编辑`post/first.md`：
+打开编辑 `post/first.md`：
 
 ```shell
 ---
@@ -126,7 +128,7 @@ title: "first"
  1. aaa
  1. bbb
  1. ccc
- ```
+```
 
 ## 安装皮肤
 

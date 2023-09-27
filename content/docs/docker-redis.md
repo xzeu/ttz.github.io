@@ -7,7 +7,6 @@ keywords: [redis,docker]
 description: ""
 tags: [教程笔记,docker,linux,nginx]
 categories: [教程笔记]
-toc: true
 author: "xzeu"
 
 # Uncomment to pin article to front page
@@ -15,8 +14,8 @@ author: "xzeu"
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: false
-toc: false
-autoCollapseToc: false
+toc: true
+autoCollapseToc: true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
@@ -45,6 +44,7 @@ mathjax: true
   - [1.14. 集群缩容](#114-集群缩容)
 
 <!--more-->
+
 # 1. Docker部署Redis集群及集群伸缩
 
 ## 1.1. 创建6个data目录
@@ -138,7 +138,7 @@ vars currentEpoch 6 lastVoteEpoch 0
 172.17.0.2:6379>set lan golang     # master插入数据(可能会报错,叫我们去别的实例存)
 172.17.0.3:6379>get lan            # node查询数据
 (error) MOVED 5798 172.17.0.2:6379 # 告诉我们该数据在172.17.0.2上
-172.17.0.5:6386> keys *            # 查键          
+172.17.0.5:6386> keys *            # 查键        
 1) "lan"
 ```
 

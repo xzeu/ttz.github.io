@@ -10,6 +10,8 @@ tags:
   - web
   - flex
 author: "xzeu"
+toc: true
+autoCollapseToc: true
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 mathjax: true
 ---
@@ -36,7 +38,9 @@ mathjax: true
   - [1.11. place-content属性](#111-place-content属性)
   - [1.12. place-item属性](#112-place-item属性)
   - [1.13. place-self属性](#113-place-self属性)
+
 <!--more-->
+
 # 1. flex的6个常用属性
 
 为了更好的学习与了解各属性的可视化效果，先制做了以下示例代码
@@ -103,7 +107,7 @@ style.css代码
   - 主轴又分主轴的开始位置和结束位置
   - 交叉轴同样也分开始位置和结束位置
 - 项目默认沿着主轴排列
-![](../images/2022-11-24-18-39-33.png)
+  ![](../images/2022-11-24-18-39-33.png)
 
 | 需要理解的名词 | 解释                 |
 | -------------- | -------------------- |
@@ -114,12 +118,12 @@ style.css代码
 | cross-start    | 侧轴开始的位置       |
 | cross-end      | 侧轴结束的位置       |
 
-
 ## 1.3. 全属性一览
 
 ### 1.3.1. 作用于容器
 
 作用于容器的属性一共6个
+
 | 属性            | 值                                                                                               | 作用                                                                                                                       |
 | --------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
 | flex-direction  | row（默认值）: 从左到右                                                                          | 决定主轴的方向，即子项目flex item的排列方向                                                                                |
@@ -145,8 +149,7 @@ style.css代码
 |                 | center：与交叉轴的中点对齐。                                                                     |                                                                                                                            |
 |                 | space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。                                        |                                                                                                                            |
 |                 | space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。           |                                                                                                                            |
-|                 | stretch（默认值）：轴线占满整个交叉轴。                                                          |
-
+|                 | stretch（默认值）：轴线占满整个交叉轴。                                                          |                                                                                                                            |
 
 ## 1.4. flex-direction属性
 
@@ -177,6 +180,7 @@ flex-direction:row(默认值) | row-reverse | column | column-reverse;
   flex-direction:         row;
   }
 ```
+
 ![](../images/2022-11-25-11-06-29.png)
 
 ### 1.4.2. row-reverse 顾名思义，从右向左横向排列，反向。
@@ -186,6 +190,7 @@ flex-direction:row(默认值) | row-reverse | column | column-reverse;
             flex-direction: row-reverse;
         }
 ```
+
 ![](../images/2022-11-25-11-07-09.png)
 
 ### 1.4.3. column 纵向从上往下排列。
@@ -195,18 +200,21 @@ flex-direction:row(默认值) | row-reverse | column | column-reverse;
             flex-direction: coulmn;
         }
 ```
+
 ![](../images/2022-11-25-11-07-35.png)
 
 ### 1.4.4. column-reverse 纵向从下往上排列。
+
+> 行排列 `flex-direction: row`，与上面效果相同。
 >
-> 行排列`flex-direction: row`，与上面效果相同。
-> 
-> 列排列`flex-direction: column`，效果如下
+> 列排列 `flex-direction: column`，效果如下
+
 ```css
  .flex-container {
             flex-direction: coulmn-reverse;
         }
 ```
+
 ![](../images/2022-11-25-11-13-18.png)
 
 ## 1.5. flew-wrap属性
@@ -214,6 +222,7 @@ flex-direction:row(默认值) | row-reverse | column | column-reverse;
 `flex-wrap`属性设置⼦项⽬的换⾏⽅式。
 
 弹性盒子默认情况下所有子元素都是排在一行上的，但容器大小有限，很有可能出现子元素被截断的情况，这时候就需要换行，`flex-wrap` 就是用来操作子元素换行的属性。`flex-wrap` 有以下三个值：
+
 - nowrap ：（默认） 不换行。
 - wrap ：换行，第一行排满后自动换到第二行。
 - wrap-reverse ：换行，与 wrap 不同的是如果出现换行，换行后的元素在第一行上方。
@@ -233,21 +242,22 @@ flex-direction:row(默认值) | row-reverse | column | column-reverse;
 ## 1.6. flex-flow属性
 
 flex-flow 是 flex-direction 和 flex-wrap 的简写形式，默认值为 row nowrap。
+
 - `flex-flow: row nowrap;`
-flex-direction、flex-wrap的简写方式,实现与前述同样的功能。
+  flex-direction、flex-wrap的简写方式,实现与前述同样的功能。
 
 ## 1.7. justify-content
 
 ## 1.8. align-items
 
-
 ## 1.9. flex属性
 
 flex:放大 缩小 宽度
-- `flex：0 1 auto;` 0 不允许放大，1 允许缩小，auto宽度自动计算（宽度默认是根据内容变化，如果设置了宽度按设置算，如果设置了`min-width`则按此计算，即`min-width > flex：width > element：width）`。
-- `flex：0 1 auto;`，即flex的默认值，也可以写作`flex：initial`。
 
-> 注：`flex：0`，由于只写了第一个参数，系统默认为`flex 0,1，auto`，与上述效果一样。
+- `flex：0 1 auto;` 0 不允许放大，1 允许缩小，auto宽度自动计算（宽度默认是根据内容变化，如果设置了宽度按设置算，如果设置了 `min-width`则按此计算，即 `min-width > flex：width > element：width）`。
+- `flex：0 1 auto;`，即flex的默认值，也可以写作 `flex：initial`。
+
+> 注：`flex：0`，由于只写了第一个参数，系统默认为 `flex 0,1，auto`，与上述效果一样。
 
 效果查看，浏览器当前大小：
 ![](../images/2022-11-23-23-46-52.png)
@@ -267,9 +277,11 @@ flex:放大 缩小 宽度
     order:2;
 }
 ```
+
 改变第一个项目的背景色，调整他的顺序为2：
 ![](../images/2022-11-23-23-48-23.png)
 把项目3排在项目2之前，
+
 ```css
 .container .item:last-of-type{
     background-color: green;
@@ -277,38 +289,39 @@ flex:放大 缩小 宽度
     order:-2;
 }
 ```
-![](../images/2022-11-23-23-48-46.png)
 
+![](../images/2022-11-23-23-48-46.png)
 
 ## 1.11. place-content属性
 
 内容位置，表现为内容对齐，利用剩余空间的分配完成内容的对齐。
 
 - place-content: start
-![](../images/2022-11-23-23-40-35.png)
+  ![](../images/2022-11-23-23-40-35.png)
 - place-content: end
-![](../images/2022-11-23-23-41-00.png)
+  ![](../images/2022-11-23-23-41-00.png)
 - place-content: center
-![](../images/2022-11-23-23-41-33.png)
+  ![](../images/2022-11-23-23-41-33.png)
 - place-content: space-between
-![](../images/2022-11-23-23-42-03.png)
+  ![](../images/2022-11-23-23-42-03.png)
 - place-content: space-around（中间空间是两边的两倍）
-![](../images/2022-11-23-23-42-15.png)
+  ![](../images/2022-11-23-23-42-15.png)
 - place-content: space-evenly（所有间距相等）
-![](../images/2022-11-23-23-42-32.png)
-纵向排列一样，就不列举了。
+  ![](../images/2022-11-23-23-42-32.png)
+  纵向排列一样，就不列举了。
 
 ## 1.12. place-item属性
 
 - place-items: stretch
 
 ![](../images/2022-11-23-23-43-30.png)
+
 - place-items: start
 
 ![](../images/2022-11-23-23-43-37.png)
-- place-items: end
-![](../images/2022-11-23-23-43-46.png)
 
+- place-items: end
+  ![](../images/2022-11-23-23-43-46.png)
 
 ## 1.13. place-self属性
 
@@ -324,4 +337,5 @@ order:-2;
 place-self: start;
 }
 ```
+
 ![](../images/2022-11-23-23-49-50.png)

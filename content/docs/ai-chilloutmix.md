@@ -14,8 +14,8 @@ author: "xzeu"
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: false
-toc: false
-autoCollapseToc: false
+toc: true
+autoCollapseToc: true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
@@ -39,7 +39,9 @@ mathjax: true
 ![](../images/678658.jpg)
 
 ![](../images/2023-03-04-133351-2048x859.jpg)
+
 <!--more-->
+
 看他在推上说的话，似乎受到了某些压力，可能有些人把他的模型用于一些非法目的吧，为了避免麻烦，他就删库了。
 
 虽然删掉ChilloutMix很可惜，不过这也难不倒网上的各种大神，毕竟这个模型流传太广，其他人还会继续发出来共享的。

@@ -14,8 +14,8 @@ author: "xzeu"
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
 comment: false
-toc: false
-autoCollapseToc: false
+toc: true
+autoCollapseToc: true
 # You can also define another contentCopyright. e.g. contentCopyright: "This is another copyright."
 contentCopyright: '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0 / 转载文章请保留链接。</a>'
 reward: false
@@ -43,7 +43,9 @@ mathjax: true
   - [3.4. 确认维度](#34-确认维度)
   - [3.5. 确认事实](#35-确认事实)
   - [3.6. 部署方式](#36-部署方式)
+
 <!--more-->
+
 <!-- more -->
 
 了解数据建模之前首先要知道的是什么是数据模型。数据模型（Data Model）是数据特征的抽象，它从抽象层次上描述了系统的静态特征、动态行为和约束条件，为数据库系统的信息表示与操作提供一个抽象的框架。
@@ -78,9 +80,9 @@ mathjax: true
 
 ### 2.1. D-R模型
 
-D-R模型（Entity-relationship model）实体关系模型，E-R模型的构成成分是实体集、属性和联系集。其表示方法如下：  
-（1） 实体集用矩形框表示，矩形框内写上实体名。  
-（2） 实体的属性用椭圆框表示，框内写上属性名，并用无向边与其实体集相连。  
+D-R模型（Entity-relationship model）实体关系模型，E-R模型的构成成分是实体集、属性和联系集。其表示方法如下：
+（1） 实体集用矩形框表示，矩形框内写上实体名。
+（2） 实体的属性用椭圆框表示，框内写上属性名，并用无向边与其实体集相连。
 （3） 实体间的联系用菱形框表示，联系以适当的含义命名，名字写在菱形框中，用无向连线将参加联系的实体矩形框分别与菱形框相连，并在连线上标明联系的类型，即1—1、1—N或M—N。如图1-1所示。
 
 ![Alt text](../images/dataModel.png)
@@ -92,21 +94,21 @@ D-R模型（Entity-relationship model）实体关系模型，E-R模型的构成�
 ### 2.3. 星型模型
 
 它是维度模型在关系型数据库上的一种实现。它是多维的数据关系，它由事实表（Fact Table）和维表（Dimension Table）组成。每个维表中都会有一个维作为主键，所有这些维的主键结合成事实表的主键。事实表的非主键属性称为事实，它们一般都是数值或其他可以进行计算的数据。该模型表示每个业务过程包含事实表，事实表存储事件的数值化度量，围绕事实表的多个维度表，维度表包含事件发生时实际存在的文本环境。这种类似于星状的结构通常称为'星型连接'。其重点关注用户如何更快速地完成需求分析，同时具有较好的大规模复杂查询的响应性能。如图1-2所示。
-![图1-2](../images/startModel.png)  
+![图1-2](../images/startModel.png)
 图1-2
 
 ### 2.4. 雪花模型
 
 它是当有一个或多个维表没有直接连接到事实表上，而是通过其他维表连接到事实表上时，其图解就像多个雪花连接在一起，故称雪花模型。雪花模型是对星型模型的扩展。如图1-3所示。
 
-![图1-2](../images/snowModel.png)  
+![图1-2](../images/snowModel.png)
 图1-3
 
 ## 3. 方案：数据建模六步骤
 
 数据建模，通俗地说，就是通过建立数据科学模型的手段解决现实问题的过程。数据建模也可以称为数据科学项目的过程，并且这个过程是周期性循环的。具体可分为六大步骤，如图2-1所示。
 
-![图2-1](../images/stepAndStep.png)  
+![图2-1](../images/stepAndStep.png)
 图2-1
 
 ### 3.1. 收集业务需求与数据实现
