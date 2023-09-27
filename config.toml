@@ -1,6 +1,12 @@
 baseURL = 'https://ttz.github.io'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+defaultContentLanguage = "zh-cn"           # Default language to use
+[languages.en]
+  languageCode = "en"
+[languages.zh-cn]
+  languageCode = "zh-cn"
+
+# languageCode = 'en-us'
+title = '天天幸福'
 
 [module]
     [[module.imports]]
@@ -18,3 +24,9 @@ title = 'My New Hugo Site'
     url = "/docs/"
     identifier = "docs"
     weight = 10
+
+[params.docs]
+  prismTheme = "lotusdocs" # (optional) - Set theme for PrismJS. Options include: lotusdocs (default), solarized-light, twilight, lucario
+  linenos = true # configure line numbers. Valid values are true, false, table, or inline. false will turn off line numbers if it’s configured to be on in site config. All remaining options will translate to a line number at the beginning of code lines (as described by Prism’s Line Numbers plugin).
+  # hl_lines = [] # lists a set of line numbers or line number ranges to be highlighted.
+  anchorlinenos = true # Configure anchors on line numbers. Valid values are true or false
