@@ -62,3 +62,11 @@ title = 'My New Hugo Site'
         path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
         disable = false
 ```
+
+### Create New Content
+
+Navigate to the root of your Hugo project and use the `hugo new` command to create a file in the `content/docs` directory:
+
+```bash
+hugo new docs/example-page.md
+```
