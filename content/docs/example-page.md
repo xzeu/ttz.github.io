@@ -46,3 +46,19 @@ Now initialize your project as a Hugo Module using the `hugo mod init` command:
 ```bash
 hugo mod init my-docs-site
 ```
+
+You can now choose your preferred method for adding the Lotus Docs theme to your new site from the options below:
+
+```toml
+baseURL = 'http://example.org/'
+languageCode = 'en-us'
+title = 'My New Hugo Site'
+
+[module]
+    [[module.imports]]
+        path = "github.com/colinwilson/lotusdocs"
+        disable = false
+    [[module.imports]]
+        path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+        disable = false
+```
