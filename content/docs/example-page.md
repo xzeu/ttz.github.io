@@ -8,12 +8,11 @@ lastmod: "2023-09-28T08:19:11+08:00"
 draft: true
 toc: true
 ---
-
 # Quickstart
 
 A guide to getting up and running with Lotus Docs.
 
-## Requirements 
+## Requirements
 
 - git
 - Go ≥ v1.19
@@ -70,3 +69,5 @@ Navigate to the root of your Hugo project and use the `hugo new` command to crea
 ```bash
 hugo new docs/example-page.md
 ```
+
+进行编辑
